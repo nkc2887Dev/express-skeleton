@@ -1,0 +1,49 @@
+#!/bin/sh
+# . "$(dirname "$0")/_/husky.sh"
+
+echo '🏗️👷 Styling, testing and building your project before committing'
+
+# Check Prettier standards
+yarn check-format ||
+(
+    echo '🤢🤮🤢🤮 Prettier Check Failed. Run yarn format, add changes and try commit again.';
+    false;
+)
+
+# Check ESLint Standards
+yarn check-lint ||
+(
+    echo '😤🏀👋😤 ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
+    false;
+)
+
+# Check tsconfig standards
+yarn check-types ||
+(
+    echo '❌ Make the changes required above.'
+    false;
+)
+
+# Check whether a build can run or not
+# echo '🏗️👷 Checking whether code is valid for next build'
+yarn build ||
+(
+    echo '❌ Build failed. Please check the above logs'
+    false;
+)
+
+# TODO: Needs to be enabled once we have proper running tests
+# yarn test ||
+# (
+#     echo '❌ Tests failed. Please check the above logs'
+#     false;
+# )
+
+# yarn test:cov ||
+# (
+#     echo '❌ Tests coverage failed. Please check the above logs'
+#     false;
+# )
+
+# If everything passes... Now we can commit
+echo '✅✅✅✅ All checkes passed, committing is allowed. ✅✅✅✅'

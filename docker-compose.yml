@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: express-skeleton
+    ports:
+      - "9876:9876"
+    environment:
+      - NODE_ENV=production
+      - PORT=9876
+    volumes:
+      - .:/index
+    command: npm start
+
+  dev:
+    build: .
+    container_name: express-skeleton-dev
+    ports:
+      - "9876:9876"
+    environment:
+      - NODE_ENV=development
+      - PORT=9876
+    volumes:
+      - .:/index
+    command: npm run dev

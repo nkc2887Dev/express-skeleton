@@ -1,0 +1,18 @@
+# Node.js dependencies
+node_modules
+
+# Build output
+dist
+
+# Logs and environment files
+logs
+*.log
+.env
+.env.example
+
+# TypeScript
+*.tsbuildinfo
+
+# Ignore package-lock.json (if necessary)
+package-lock.json
+yarn.lock
